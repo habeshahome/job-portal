@@ -1,0 +1,32 @@
+FULL-STACK DEVELOPER TASK: CREATE A JOB WEBSITE
+
+Technologies :
+    Backend (NodeJS for APIs )
+    Frontend (Angular 2+ (typescript )
+    Database MongoDB
+
+Admin panel :
+    Create a new Job ( Minimum job fields: Company Name, Job Title, Job Description, created at  )
+    Edit Job
+    List Jobs
+    List Jobs application
+    List users
+
+Users :
+    Register  (Minimum user fields: Name, Email, Mobile, Password)
+    Login ( Email, Password)
+    Update Profile : (CV_Text:  text, Designation)
+    Add User work experience:
+    -  Job Title
+    -  Company
+    -  Date Started
+    -  Date end
+    -  Industry (IT, Hospitality, Engineering, Others)
+    -  User education:( Highest level, School name, Date Completed )
+    -  User skills:  list of skills
+    Users (logged in ) can apply for a job
+    Users (not logged in /logged in ) can search for a job search by Job Title
+
+Landing page for displaying the list of jobs sorted by created at
+    Search field for jobs
+    Apply button to apply for a specific job 
