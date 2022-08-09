@@ -1,4 +1,8 @@
-<div *ngFor="let job of jobs;"
+<app-header> </app-header>
+
+<div 
+    *ngFor="let job of jobs;"
+    [routerLink]="['/jobs', job.id]"
     class="my-4 mx-auto shadow-lg rounded-2xl w-11/12 md:w-1/3 p-4 bg-white relative overflow-hidden">
     <div class="w-5/6">
         <span class="text-gray-500 rounded-lg text-xs font-thin mb-1 py-1">
@@ -6,7 +10,7 @@
         </span>
 
         <div>
-            <a [routerLink]="['/job', job.id]">
+            <a>
                 <p class="text-gray-800 text-lg font-medium mb-2">
                     {{ job.title }}
                 </p>

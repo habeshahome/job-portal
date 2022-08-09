@@ -11,5 +11,5 @@ export interface Applicant {
 
 export interface BasicAuth { 
     email: string
-    pwd: string
+    password: string
 }

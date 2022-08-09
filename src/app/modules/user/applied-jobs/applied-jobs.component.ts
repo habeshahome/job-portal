@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JobApplications } from 'db'
+import { DemoJobs } from 'db';
+
 
 @Component({
   selector: 'app-applied-jobs',
@@ -10,7 +12,7 @@ export class AppliedJobsComponent implements OnInit {
 
   constructor() { }
 
-  appliedJobs = JobApplications
+  appliedJobs = DemoJobs
   
   ngOnInit(): void {
   }

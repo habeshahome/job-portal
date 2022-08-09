@@ -19,10 +19,14 @@ import { UserLayoutComponent } from './modules/user/user-layout/user-layout.comp
 import { UpdateProfileComponent } from './modules/user/update-profile/update-profile.component';
 import { AppliedJobsComponent } from './modules/user/applied-jobs/applied-jobs.component';
 import { PermissionGuard } from './guards/permission.guard';
+import { JobsComponent } from './components/jobs/jobs.component';
+import { JobComponent } from './components/job/job.component';
 
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'jobs/:job_id', component: JobComponent },
+  { path: 'jobs', component: JobsComponent },
   {
     path: 'auth',
     component: LayoutComponent,
@@ -49,11 +53,12 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { // component less routing
-        path: '', 
+        path: '',
         canActivateChild: [PermissionGuard],
         children: [
           { path: 'update-profile', component: UpdateProfileComponent },
-          { path: 'applied-jobs', component: AppliedJobsComponent }
+          { path: 'applied-jobs/:job_id', component: JobComponent },
+          { path: 'applied-jobs', component: AppliedJobsComponent },
         ]
       }
 
