@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { UserLayoutComponent } from './user-layout/user-layout.component';
 import { UserHeaderComponent } from './user-header/user-header.component';
 import { AppliedJobsComponent } from './applied-jobs/applied-jobs.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { AppliedJobsComponent } from './applied-jobs/applied-jobs.component';
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
   ]
 })
 export class UserModule { }

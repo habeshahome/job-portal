@@ -1,1 +1,26 @@
-<p>list-job-applications works!</p>
+<div class="text-center pb-6">
+    <h2> Job Applications </h2>
+</div>
+<div class="grid md:grid-cols-4 gap-4 px-6">
+    <!-- [routerLink]="['/jobs', job._id]" -->
+    <div *ngFor="let job of applications; let i = index" 
+        class="mx-auto shadow-lg rounded-2xl p-4 bg-white relative overflow-hidden w-full">
+        <div class="w-full">
+            <div class="flex flex-row justify-between">
+                <p class="text-gray-800 font-medium mb-2">
+                    {{ job.job_title }}
+                </p>
+            </div>
+            <div class="flex flex-row justify-between">
+                <p class="text-indigo-500 font-medium">
+                    {{ applicants[i]?.email}}
+                </p>
+                <span class="text-gray-500 rounded-lg text-xs font-thin mb-1 py-1">
+                    {{ job.createdAt | slice : 0 : 10 }}
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+</div>

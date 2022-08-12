@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Menu } from '../../../TypeInterface'
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-admin-header',
@@ -8,27 +11,40 @@ import { Menu } from '../../../TypeInterface'
 })
 export class AdminHeaderComponent implements OnInit {
 
-  constructor() { }
+  role$: Observable<string>
+  constructor(
+    private store: Store<{ role: string }>,
+    private authService: AuthService
+  ) {
+    this.role$ = this.store.select('role')
+  }
+
   brand: string = "Google Jobs"
-  menuItems: Menu[] = [
-    {
-      name: 'Create Job',
-      slug: "create-job"
-    },
-    {
-      name: 'List Jobs',
-      slug: "list-jobs"
-    },
-    {
-      name: 'Edit Job',
-      slug: "edit-job"
-    },
-    {
-      name: 'List Applications',
-      slug: "list-job-applications"
-    }
-  ]
+  menuItems: Menu[] = []
+
   ngOnInit(): void {
+    this.menuItems = [
+      {
+        name: 'Create Job',
+        slug: "create-job"
+      },
+      {
+        name: 'List Jobs',
+        slug: "list-jobs"
+      },
+      {
+        name: 'Edit Job',
+        slug: "edit-job"
+      },
+      {
+        name: 'List Applications',
+        slug: "list-job-applications"
+      }
+    ]
+  }
+
+  logout() {
+    this.authService.logout()
   }
 
 }

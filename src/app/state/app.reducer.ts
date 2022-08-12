@@ -1,12 +1,31 @@
 import { createReducer, on } from '@ngrx/store'
-import { increment, decrement, reset } from './app.actions'
+import { 
+    getRole, 
+    setAdmin, 
+    setUser, 
+    setPublic, 
+    // login status
+    isLoggedIn, 
+    setIsLoggedIn 
+} from './app.actions'
 
-export const initialState = 0
 
-export const counterReducer =
+// login reducer
+export const initialRoleState = localStorage.getItem('role') || "JOB PORTAL"
+export const roleReducer =
     createReducer(
-        initialState,
-        on(increment, (state) => state + 1),
-        on(decrement, (state) => state - 1),
-        on(reset, (state) => state = 0)
+        initialRoleState,
+        on(getRole, (state) => state),
+        on(setAdmin, (state) => "ADMIN"),
+        on(setUser, (state) => "USER"),
+        on(setPublic, (state) => "JOB PORTAL"),
+    )
+
+
+// is logged in reducer 
+export const initialLoginState = false;
+export const loginStatusReducer = createReducer(
+    initialLoginState, 
+    on(isLoggedIn, (state) => state), 
+    on(setIsLoggedIn, (state) => true )
     )

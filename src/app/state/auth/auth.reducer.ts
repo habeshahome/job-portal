@@ -1,13 +1,22 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { isLoggedIn, login, logout } from './auth.actions'
+import { login, logout } from './auth.actions'
 
-export const initialState = false;
+
+export let initialState: boolean
+
+const local = localStorage.getItem('isLoggedIn')
+
+if (local === 'true') {
+    initialState = true;
+} else {
+    initialState = false;
+}
+
 
 export const loginReducer =
     createReducer(
         initialState,
         on(login, (state) => state = true),
-        on(logout, (state) => state = false),
-        on(isLoggedIn, (state) => state)
+        on(logout, (state) => state = false)
     )

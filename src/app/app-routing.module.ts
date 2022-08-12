@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminModule } from './modules/admin/admin.module';
 import { AuthGuard } from './guards/auth.guard';
 
 import { SearchComponent } from './components/search/search.component';
@@ -8,7 +7,6 @@ import { CreateJobComponent } from './modules/admin/create-job/create-job.compon
 import { EditJobComponent } from './modules/admin/edit-job/edit-job.component';
 import { ListJobsComponent } from './modules/admin/list-jobs/list-jobs.component';
 import { ListJobApplicationsComponent } from './modules/admin/list-job-applications/list-job-applications.component';
-import { ListUsersComponent } from './modules/admin/list-users/list-users.component';
 import { LoginComponent } from './modules/auth/login/login.component';
 import { RegisterComponent } from './modules/auth/register/register.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -18,7 +16,8 @@ import { AdminLayoutComponent } from './modules/admin/admin-layout/admin-layout.
 import { UserLayoutComponent } from './modules/user/user-layout/user-layout.component';
 import { UpdateProfileComponent } from './modules/user/update-profile/update-profile.component';
 import { AppliedJobsComponent } from './modules/user/applied-jobs/applied-jobs.component';
-import { PermissionGuard } from './guards/permission.guard';
+import { UserGuard } from './guards/user.guard';
+import { AdminGuard } from './guards/admin.guard';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { JobComponent } from './components/job/job.component';
 
@@ -38,13 +37,20 @@ const appRoutes: Routes = [
   {
     path: 'admin',
     canActivate: [AuthGuard],
-    canActivateChild: [PermissionGuard],
     component: AdminLayoutComponent,
     children: [
-      { path: 'create-job', component: CreateJobComponent },
-      { path: 'edit-job', component: EditJobComponent },
-      { path: 'list-jobs', component: ListJobsComponent },
-      { path: 'list-job-applications', component: ListJobApplicationsComponent }
+      {
+        // component less routing
+        path: '',
+        canActivateChild: [AdminGuard],
+        children:
+          [
+            { path: 'create-job', component: CreateJobComponent },
+            { path: 'edit-job', component: EditJobComponent },
+            { path: 'list-jobs', component: ListJobsComponent },
+            { path: 'list-job-applications', component: ListJobApplicationsComponent }
+          ]
+      }
     ]
   },
   {
@@ -54,7 +60,7 @@ const appRoutes: Routes = [
     children: [
       { // component less routing
         path: '',
-        canActivateChild: [PermissionGuard],
+        canActivateChild: [UserGuard],
         children: [
           { path: 'update-profile', component: UpdateProfileComponent },
           { path: 'applied-jobs/:job_id', component: JobComponent },

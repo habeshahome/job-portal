@@ -1,5 +1,10 @@
-import { createAction, props } from '@ngrx/store';
+import { createAction } from '@ngrx/store';
 
-export const increment = createAction("[Counter Component] INCREMENT")
-export const decrement = createAction("[Counter Component] DECREMENT")
-export const reset = createAction("[Counter Component] RESET")
+export const getRole = createAction("[GET ROLE] GET ROLE")
+export const setAdmin = createAction("[ADMIN ROLE] SET ADMIN")
+export const setUser = createAction("[USER ROLE] SET USER")
+export const setPublic = createAction("[PUBLIC ROLE]] SET PUBLIC")
+
+
+export const isLoggedIn = createAction("[CHECK LOGIN STATUS] Get Login Status")
+export const setIsLoggedIn = createAction("[SET LOGIN STATUS] Set Login Status")

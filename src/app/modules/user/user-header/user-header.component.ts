@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AuthService } from 'src/app/services/auth.service';
+
 import { Menu } from '../../../TypeInterface'
 
 @Component({
@@ -8,7 +12,14 @@ import { Menu } from '../../../TypeInterface'
 })
 export class UserHeaderComponent implements OnInit {
 
-  constructor() { }
+  role$: Observable<string>
+  constructor(
+    private store: Store<{ role: string }>,
+    private authService: AuthService
+  ) {
+    this.role$ = store.select('role');
+  }
+
   brand: string = "Google Jobs"
   menuItems: Menu[] = [
     {
@@ -17,10 +28,14 @@ export class UserHeaderComponent implements OnInit {
     },
     {
       name: "Find Jobs",
-      slug: ""
+      slug: "/jobs"
     }
   ]
   ngOnInit(): void {
+  }
+
+  logout() {
+    this.authService.logout()
   }
 
 }

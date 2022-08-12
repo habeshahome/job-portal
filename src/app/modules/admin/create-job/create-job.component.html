@@ -1,1 +1,29 @@
-<p>create-job works!</p>
+<div class="w-6/12 mx-auto">
+    <div class="text-center">
+        <h2 class="text-2xl font-bold text-gray-600"> Create Job </h2>
+    </div>
+    <form [formGroup]="createJobForm" (ngSubmit)="createJob()" class="w-full">
+        <div class="my-2">
+            <input
+                class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                formControlName="job_title" type="text" placeholder="Job Title" required>
+        </div>
+        <div class="my-2">
+            <input
+                class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                formControlName="company" type="text" placeholder="Company / Employer" required>
+        </div>
+        <div class="my-2">
+            <textarea
+                class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                formControlName="job_description" type="text" placeholder="Job Description" rows="10" cols="10" required>
+                </textarea>
+        </div>
+        <div class="my-4">
+            <button
+                class="w-4/12 py-2 px-4  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+                type="submit"> Create Job </button>
+        </div>
+    </form>
+
+</div>

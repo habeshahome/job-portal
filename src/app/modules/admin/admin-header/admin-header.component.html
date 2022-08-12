@@ -5,14 +5,13 @@
                 <div class=" flex items-center">
                     <a class="flex-shrink-0 h-full items-center text-2xl font-bold tracking-wide text-gray-500"
                         routerLink="">
-                         ADMIN
+                        <!-- {{ role$ | async }} --> Job Portal
                     </a>
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-4">
-                            <a  *ngFor="let item of menuItems"
+                            <a *ngFor="let item of menuItems"
                                 class="text-gray-300  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium cursor-pointer"
-                                routerLink="{{ item.slug }}"
-                                > {{ item.name }}
+                                routerLink="{{ item.slug }}"> {{ item.name }}
                             </a>
                         </div>
                     </div>
@@ -21,7 +20,7 @@
                     <div class="ml-4 flex items-center md:ml-6">
                     </div>
                 </div>
-                <div class="-mr-2 flex md:hidden">
+                <div class="-mr-2 hidden">
                     <button
                         class="text-gray-800 dark:text-white hover:text-gray-300 inline-flex items-center justify-center p-2 rounded-md focus:outline-none">
                         <svg width="20" height="20" fill="currentColor" class="h-8 w-8" viewBox="0 0 1792 1792"
@@ -34,21 +33,19 @@
                 </div>
                 <div class="ml-auto flex flex-row space-x-4">
                     <div>
-                        <a  class="text-gray-300  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium cursor-pointer"
-                            routerLink="auth/login"> Login
-                        </a>
-                        <a  class="text-gray-300  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium cursor-pointer"
-                        routerLink=""> Logout
-                    </a>
+                        <span
+                            class="text-gray-300  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium cursor-pointer"
+                            (click)="logout()"> Logout
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="md:hidden">
+        <div class="hidden">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a class="text-gray-300 hover:text-gray-800 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                     routerLink="">
-                    Mobile Menu
+                    
                 </a>
             </div>
         </div>

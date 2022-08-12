@@ -4,17 +4,16 @@ import { DirectiveDirective } from './directives/directive.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { counterReducer } from './state/app.reducer';
+import { roleReducer } from './state/app.reducer';
 import { loginReducer } from './state/auth/auth.reducer';
 
 import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
-
-
 
 import { AppComponent } from './app.component';
 import { ButtonComponent } from './components/button/button.component';
@@ -56,7 +55,13 @@ import { MyCounterComponent } from './components/my-counter/my-counter.component
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    StoreModule.forRoot({ count: counterReducer, authStatus: loginReducer }, {}),
+    FormsModule,
+    ReactiveFormsModule,
+    StoreModule.forRoot(
+      {
+        role: roleReducer,
+        loginStatus: loginReducer,
+      }, {}),
     EffectsModule.forRoot([]),
   ],
   providers: [],

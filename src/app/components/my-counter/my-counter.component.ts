@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { increment, decrement, reset } from '../../state/app.actions';
+import { setAdmin, setUser, setPublic } from '../../state/app.actions';
 
 @Component({
   selector: 'app-my-counter',
@@ -9,22 +9,22 @@ import { increment, decrement, reset } from '../../state/app.actions';
   styleUrls: ['./my-counter.component.css']
 })
 export class MyCounterComponent implements OnInit {
-  count$: Observable<number>
+  role$: Observable<string>
 
-  constructor(private store: Store<{ count: number }>) {
-    this.count$ = store.select('count');
+  constructor(private store: Store<{ role: string }>) {
+    this.role$ = store.select('role');
   }
 
   increment() {
-    this.store.dispatch(increment());
+    this.store.dispatch(setAdmin());
   }
  
   decrement() {
-    this.store.dispatch(decrement());
+    this.store.dispatch(setUser());
   }
  
   reset() {
-    this.store.dispatch(reset());
+    this.store.dispatch(setPublic());
   }
 
   ngOnInit(): void {
