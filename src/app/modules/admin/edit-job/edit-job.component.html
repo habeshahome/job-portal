@@ -3,18 +3,22 @@
         <h2 class="text-2xl font-bold text-gray-600"> Edit Job </h2>
     </div>
 
-    <form [formGroup]="editJobForm" (ngSubmit)="editJob()" class="w-full">
+    <form [formGroup]="selectJobForm" class="w-full">
         <div class="flex flex-col justify-left md:flex-row md:justify-start md:items-center md:space-x-4 space-y-4 ">
             <div class="md:pt-6">
                 <p> SELECT JOB </p>
             </div>
             <div class="">
-                <select class="form-control" formControlName="selectedJob"
+                <select 
+                    formControlName="selectedJob"
+                    (change)="onChange()"
                     class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option *ngFor="let job of jobs" [ngValue]="job._id">{{ job.job_title }}</option>
                 </select>
             </div>
         </div>
+    </form>
+    <form [formGroup]="editJobForm" (ngSubmit)="editJob()" class="w-full">
         <div class="my-2">
             <input
                 class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
@@ -23,12 +27,12 @@
         <div class="my-2">
             <input
                 class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                formControlName="job_description" type="text" placeholder="Job Description" required>
+                formControlName="company" type="text" placeholder="Company" required>
         </div>
         <div class="my-2">
             <textarea
                 class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                formControlName="company" type="text" placeholder="Company" rows="10" cols="10" required>
+                formControlName="job_description" type="text" placeholder="Job Description" rows="10" cols="10" required>
                 </textarea>
         </div>
         <div class="my-4">

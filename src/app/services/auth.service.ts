@@ -20,8 +20,8 @@ import { baseUrl } from '../api/config';
 export class AuthService {
   loginStatus$: Observable<boolean>
 
-  loginResponse = []
-  registerResponse = []
+  loginResponse: any = []
+  registerResponse: any = []
   accessToken: string = ''
   responseData: any = []
   user: { name: string, email: string, mobile: string, role: string, _id: string }
@@ -77,6 +77,7 @@ export class AuthService {
         this.user = this.responseData[1].user
         this.accessToken = this.responseData[0].accessToken
         this.setLocals()
+
         if (this.user.role === "USER") {
           this.store.dispatch(setUser())
           this.store.dispatch(login()) // setting login status
@@ -95,21 +96,35 @@ export class AuthService {
   register(user: UserModel) {
     // by default - registering users not admins
     console.log("Inside Registration Service ")
+    console.log(user)
+
+    const httpHeaders = new HttpHeaders()
+      .set('Content-Type', 'application/json')
 
     this.httpClient
-      .post(this.api_register_url, user)
-      .subscribe(res => {
-        this.responseData = res
-
-        this.user = this.responseData[1].user
-        this.accessToken = this.responseData[0].accessToken
-
-        this.store.dispatch(setUser())
-        this.store.dispatch(login()) // setting login status
-        this.permissionService.isUser()
-        this.router.navigate(['/user/applied-jobs'])
-        //this.permissionService.hasPermission()
-      })
+      .post(
+        this.api_register_url,
+        user,
+        { headers: httpHeaders })
+        .subscribe(res => {
+          this.responseData = res
+          this.user = this.responseData[1].user
+          this.accessToken = this.responseData[0].accessToken
+          this.setLocals()
+  
+          if (this.user.role === "USER") {
+            this.store.dispatch(setUser())
+            this.store.dispatch(login()) // setting login status
+            this.permissionService.isUser()
+            this.router.navigate(['/user/applied-jobs'])
+          }
+          else if (this.user.role === "ADMIN") {
+            this.store.dispatch(setAdmin())
+            this.store.dispatch(login()) // setting login status
+            this.permissionService.isAdmin()
+            this.router.navigate(['/admin']);
+          }
+        });
   }
 
   logout() {
@@ -121,6 +136,7 @@ export class AuthService {
   }
 
   setLocals() {
+    console.log("Configuring - locals")
     localStorage.setItem('email', this.user.email)
     localStorage.setItem('mobile', this.user.mobile)
     localStorage.setItem('isLoggedIn', "true")

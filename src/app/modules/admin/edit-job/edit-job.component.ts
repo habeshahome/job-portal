@@ -11,7 +11,9 @@ import { baseUrl } from '../../../api/config';
 })
 export class EditJobComponent implements OnInit {
   public editJobForm !: FormGroup;
+  public selectJobForm !: FormGroup;
   jobs: any = []
+  job: any = {}
   selectedJob: string = ''
   message: string = ''
 
@@ -32,12 +34,36 @@ export class EditJobComponent implements OnInit {
       })
   }
 
+  onChange() {
+    console.log("Selection Changed")
+    console.log(this.selectedJob)
+    this.httpClient
+      .get(baseUrl + "jobs/" + this.selectedJob)
+      .subscribe((res) => {
+        console.log("Single Job to populate fields")
+        console.log(res)
+        this.job = res
+        this.editJobForm.setValue({
+          company: this.job[0].company,
+          job_title: this.job[0].job_title, 
+          job_description: this.job[0].job_description,
+        })
+      })
+  }
+
   editJob() {
     console.log("Inside Edit Job")
 
     if (this.editJobForm.value.selectedJob !== '') {
       console.log(this.selectedJob)
-      this.adminService.editJob(this.editJobForm.value)
+      this.adminService.editJob(
+        {
+          selectedJob: this.selectJobForm.value.selectedJob,
+          job_title: this.editJobForm.value.job_title,
+          job_description: this.editJobForm.value.job_description,
+          company: this.editJobForm.value.company
+        }
+      )
     } else {
       this.message = "Select Job to be updated"
     }
@@ -45,9 +71,13 @@ export class EditJobComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.editJobForm = this.formBuilder
+    this.selectJobForm = this.formBuilder
       .group({
         selectedJob: new FormControl('', [Validators.required]),
+      })
+
+    this.editJobForm = this.formBuilder
+      .group({
         job_title: new FormControl('', [Validators.required]),
         job_description: new FormControl('', [Validators.required]),
         company: new FormControl('', [Validators.required]),
